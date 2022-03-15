@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 
 public abstract class ProcesadorPagoTarjetaService {
 
+    private void imprimirMensajeDeTransaccion(String mensaje){
+        System.out.println(mensaje);
+    }
+
     private Boolean fechaExpiracionValida(Tarjeta tarjeta) {
         Boolean tarjetaEsValida = false;
         LocalDateTime fechaActual = LocalDateTime.now();
@@ -42,20 +46,18 @@ public abstract class ProcesadorPagoTarjetaService {
                 Double nuevoSaldo = ((DebitoTarjeta) tarjeta).getSaldoDisponible() - monto;
 
                 tarjetaDebito.setSaldoDisponible(nuevoSaldo);
-                System.out.println("Operación exitosa. Su nuevo saldo es $ " + tarjetaDebito.getSaldoDisponible() + ".");
+                imprimirMensajeDeTransaccion("Operación exitosa. Su nuevo saldo es $ " + tarjetaDebito.getSaldoDisponible() + ".");
             }
             else if(esCredito){
                 CreditoTarjeta tarjetaCredito = (CreditoTarjeta) tarjeta;
                 tarjetaCredito.setSaldoUtilizado(monto);
 
-                System.out.println("Operación exitosa. Su límite actualizado ahora es de $ " + tarjetaCredito.limiteDisponible() + ".");
+                imprimirMensajeDeTransaccion("Operación exitosa. Su límite actualizado ahora es de $ " + tarjetaCredito.limiteDisponible() + ".");
             }
         } catch (FechaDeVencimientoNoValidaDebitoTarjetaException e) {
             e.printStackTrace();
-            // System.out.println(e.getMessage());
         } catch (FechaDeVencimientoNoValidaCreditoTarjetaException e) {
             e.printStackTrace();
-            // System.out.println(e.getMessage());
         }
     }
 
