@@ -15,4 +15,20 @@ public class CreditoTarjeta extends Tarjeta{
         this.limite = limite;
         this.saldoUtilizado = saldoUtilizado;
     }
+
+    public void setSaldoUtilizado(Double saldoUtilizado) {
+        this.saldoUtilizado = saldoUtilizado;
+    }
+
+    public Double getLimite() {
+        return limite;
+    }
+
+    public Double getSaldoUtilizado() {
+        return saldoUtilizado;
+    }
+
+    public void setLimite(Double limite) {
+        this.limite = limite;
+    }
 }

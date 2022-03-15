@@ -46,6 +46,8 @@ public abstract class ProcesadorPagoTarjetaService {
             }
             else if(esCredito){
                 CreditoTarjeta tarjetaCredito = (CreditoTarjeta) tarjeta;
+                tarjetaCredito.setSaldoUtilizado(monto);
+
                 System.out.println("Operación exitosa. Su límite actualizado ahora es de $ " + tarjetaCredito.limiteDisponible() + ".");
             }
         } catch (FechaDeVencimientoNoValidaDebitoTarjetaException e) {
